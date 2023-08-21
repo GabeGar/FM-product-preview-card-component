@@ -1,14 +1,43 @@
-import productImg from "./assets/image-product-mobile.jpg";
+import { useState, useEffect } from "react";
+
+import productImgMobile from "./assets/image-product-mobile.jpg";
+import productImgDesktop from "./assets/image-product-desktop.jpg";
 
 import CartIcon from "./components/CartIcon";
 
+const initSrcByScreenState = () => {
+    return window.innerHeight >= 576 ? productImgDesktop : productImgMobile;
+};
+
 const App = () => {
+    const [currentImgSrc, setCurrentImgSrc] = useState(() =>
+        initSrcByScreenState()
+    );
+
+    useEffect(() => {
+        const handleResize = (e) => {
+            if (e.currentTarget.innerWidth < 576) {
+                setCurrentImgSrc(productImgMobile);
+                console.log("less than 576");
+            }
+
+            if (e.currentTarget.innerWidth >= 576) {
+                setCurrentImgSrc(productImgDesktop);
+                console.log("greater than or equal to 576");
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <main className="page">
             <div className="product-card">
                 <section className="product-info">
                     <img
-                        src={productImg}
+                        src={currentImgSrc}
                         alt="Gabrielle Chanel Paris perfume"
                     />
                     <span className="type">Perfume</span>
