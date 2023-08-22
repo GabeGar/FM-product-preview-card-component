@@ -6,7 +6,7 @@ import productImgDesktop from "./assets/image-product-desktop.jpg";
 import CartIcon from "./components/CartIcon";
 
 const initSrcByScreenState = () => {
-    return window.innerHeight >= 576 ? productImgDesktop : productImgMobile;
+    return window.innerWidth >= 576 ? productImgDesktop : productImgMobile;
 };
 
 const App = () => {
@@ -18,12 +18,10 @@ const App = () => {
         const handleResize = (e) => {
             if (e.currentTarget.innerWidth < 576) {
                 setCurrentImgSrc(productImgMobile);
-                console.log("less than 576");
             }
 
             if (e.currentTarget.innerWidth >= 576) {
                 setCurrentImgSrc(productImgDesktop);
-                console.log("greater than or equal to 576");
             }
         };
 
