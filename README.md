@@ -57,7 +57,7 @@ Users should be able to:
 -   I decided to utilize react's useEffect and useState hooks, to add event listeners on the global window object and store current image src as state. That way, I could swap the src in the app component, based on the current window size and update said src state accordingly, whenever someone resizes the window. I went down this path to reinforce some of my react skills, though I am aware that there are a few other ways of handling this process of
     image swapping.
 
--   Snippet below for my method (within the app component):
+-   Snippet below for my method (within the App.jsx):
 
 ```js - react
 // Outside App
@@ -74,12 +74,10 @@ useEffect(() => {
     const handleResize = (e) => {
         if (e.currentTarget.innerWidth < 576) {
             setCurrentImgSrc(productImgMobile);
-            console.log("less than 576");
         }
 
         if (e.currentTarget.innerWidth >= 576) {
             setCurrentImgSrc(productImgDesktop);
-            console.log("greater than or equal to 576");
         }
     };
 
